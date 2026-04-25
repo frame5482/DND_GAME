@@ -69,7 +69,7 @@ async function callBackendChat(message) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 
                 message, 
-                modelPriority: [selectedModel, "gemini-flash-latest"]
+                modelPriority: [selectedModel, "gemma-3-27b-it", "gemma-3-12b-it", "gemini-flash-latest"]
             })
         });
         const data = await response.json();

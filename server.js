@@ -24,7 +24,7 @@ async function callGemini(prompt, systemInstruction = "", modelPriority = []) {
     // ถ้าไม่มีการระบุลำดับ ให้ใช้ค่ามาตรฐาน
     const modelsToTry = (modelPriority && modelPriority.length > 0) 
         ? modelPriority 
-        : ["gemini-flash-latest", "gemini-1.5-flash", "gemini-3-flash"];
+        : ["gemma-3-27b-it", "gemma-3-12b-it", "gemini-flash-latest", "gemma-3-4b-it"];
 
     for (let modelName of modelsToTry) {
         try {
