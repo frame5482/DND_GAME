@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Checker | DND AI</title>
+    <style>
+        body { background: #0a0a0c; color: white; font-family: sans-serif; padding: 20px; }
+        .model-item { background: rgba(255,255,255,0.05); padding: 10px; margin-bottom: 5px; border-radius: 5px; display: flex; justify-content: space-between; }
+        .id { color: #ffb703; font-weight: bold; }
+        .name { color: #a8dadc; }
+    </style>
+</head>
+<body>
+    <h1>รายชื่อโมเดลที่ใช้งานได้ (Available Models)</h1>
+    <p>เลื่อนหาชื่อโมเดลที่เป็น Gemma 3 แล้วดูช่องสีเหลือง (ID) ครับ</p>
+    <div id="list">กำลังโหลด...</div>
+
+    <script>
+        fetch('/api/models')
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById('list');
+                list.innerHTML = '';
+                data.models.forEach(m => {
+                    const div = document.createElement('div');
+                    div.className = 'model-item';
+                    const modelId = m.name.replace('models/', '');
+                    div.innerHTML = `<span class="id">${modelId}</span> <span class="name">${m.displayName}</span>`;
+                    list.appendChild(div);
+                });
+            })
+            .catch(err => {
+                document.getElementById('list').innerHTML = 'เกิดข้อผิดพลาด: ' + err.message;
+            });
+    </script>
+</body>
+</html>

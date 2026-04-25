@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สร้างตัวละครและทีม | DND AI Adventure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=Mitr:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="setup-body">
+    <div id="app">
+        <!-- STEP 1: World Setup -->
+        <section id="world-screen" class="screen active">
+            <div class="glass-container narrow">
+                <h1 class="title">THE <span class="gold">WORLD</span></h1>
+                <p class="subtitle">กำหนดตำนานและกฎเกณฑ์ของโลก</p>
+                <div class="card">
+                    <h3><i class="fas fa-globe-europe"></i> ข้อมูลโลก (World Setting)</h3>
+                    <textarea id="world-prompt" placeholder="เช่น 'โลกแฟนตาซีที่มีมังกรครองเมือง'..."></textarea>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-microchip gold"></i> ลำดับโมเดล (Model Priority)</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">ระบุชื่อโมเดลเรียงตามลำดับ (คั่นด้วยเครื่องหมายคอมม่า)</p>
+                    <input type="text" id="model-priority" value="gemini-3-flash, gemini-2.5-flash, gemma-3-27b-it, gemma-3-12b-it, gemini-flash-latest" placeholder="ระบุชื่อโมเดล...">
+                </div>
+                <div class="actions">
+                    <button id="next-to-char-btn" class="btn-primary">ถัดไป: สร้างปาร์ตี้ <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 2: Character & Party Creator -->
+        <section id="char-screen" class="screen">
+            <div class="glass-container">
+                <h1 class="title">YOUR <span class="gold">PARTY</span></h1>
+                <p class="subtitle">กำหนดสมาชิกที่จะออกเดินทางไปกับคุณ</p>
+                
+                <div id="setup-container" class="setup-grid">
+                    <!-- Main Hero (Fixed) -->
+                    <div class="card hero-card">
+                        <h3><i class="fas fa-crown gold"></i> ตัวละครหลัก (คุณ)</h3>
+                        <div class="form-group">
+                            <label>ชื่อ</label>
+                            <input type="text" id="char-name" placeholder="ชื่อตัวละคร...">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>เพศ</label>
+                                <input type="text" id="char-gender" placeholder="เช่น ชาย, หญิง, ไม่ระบุ...">
+                            </div>
+                            <div class="form-group">
+                                <label>เผ่าพันธุ์</label>
+                                <input type="text" id="char-race" placeholder="เช่น Human, Elf...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>อาชีพ</label>
+                            <input type="text" id="char-class" placeholder="เช่น Warrior, Mage...">
+                        </div>
+                        <div class="form-group">
+                            <label>ลักษณะนิสัย</label>
+                            <input type="text" id="char-personality" placeholder="เช่น กล้าหาญ, สุขุม, ขี้เล่น...">
+                        </div>
+                        <div class="form-group">
+                            <label>Avatar URL</label>
+                            <input type="text" id="char-avatar" placeholder="https://...">
+                        </div>
+                        <textarea id="char-bio" placeholder="ประวัติย่อ..."></textarea>
+                    </div>
+
+                    <!-- Party Members Container -->
+                    <div id="party-members-container" class="contents-grid">
+                        <!-- Dynamic members will be added here -->
+                    </div>
+
+                    <!-- Add Member Button -->
+                    <div class="add-card-wrapper">
+                        <button id="add-member-btn" class="btn-add-member">
+                            <i class="fas fa-plus"></i>
+                            <span>เพิ่มสมาชิกในทีม</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="back-to-world-btn" class="btn-secondary">ย้อนกลับ</button>
+                    <button id="start-game-btn" class="btn-primary"><i class="fas fa-scroll"></i> เริ่มการผจญภัย</button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="setup.js"></script>
+</body>
+</html>
